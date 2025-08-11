@@ -1,0 +1,24 @@
+create database Transactions;
+
+use transactions;
+
+select * from credit_card_transactions;
+
+-- 1. Total Spend by City 
+SELECT city, SUM(amount) AS total_spent FROM credit_card_transactions GROUP BY city ORDER BY total_spent DESC; 
+
+-- 2. Monthly Spend Trend 
+SELECT DATE_FORMAT(transaction_date, '%Y-%m') AS month, SUM(amount) AS total_amount 
+FROM credit_card_transactions  GROUP BY month ORDER BY month; 
+
+-- 3. Expense Type Distribution 
+SELECT exp_type, COUNT(*) AS txn_count, SUM(amount) AS total_spend 
+FROM credit_card_transactions GROUP BY exp_type ORDER BY total_spend DESC; 
+
+-- 4. Gender-wise Spending 
+SELECT gender, COUNT(*) AS txn_count, SUM(amount) AS total_spend 
+FROM credit_card_transactions GROUP BY gender;
+
+-- 5. Card Type Performance 
+SELECT card_type, COUNT(*) AS txn_count, AVG(amount) AS avg_spend 
+FROM credit_card_transactions GROUP BY card_type;
